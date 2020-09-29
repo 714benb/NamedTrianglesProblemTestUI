@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Index</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $('#buttonTest1').click(function () {
+        $.ajax({
+          type: 'GET',
+          url: 'https://localhost:44337/API/triangleName?v1.X=0&v1.Y=0&v2.X=10&v2.Y=10&v3.X=0&v3.Y=10',
+          success: function (result) {
+            $('#result1').html(result);
+          }
+        });
+      });
+
+      $('#buttonTest2').click(function () {
+        var paramString = $('#paramString').val();
+        $.ajax({
+          type: 'GET',
+          url: 'https://localhost:44337/API/triangleName?' + paramString,
+          success: function (result) {
+            $('#result2').html(result);
+          }
+        });
+      });
+
+      $('#buttonTest3').click(function () {
+        var v1 = "v1.X=" + $("#V1X").val() + "&v1.Y=" + $("#V1Y").val();
+        var v2 = "v2.X=" + $("#V2X").val() + "&v2.Y=" + $("#V2Y").val();
+        var v3 = "v3.X=" + $("#V3X").val() + "&v3.Y=" + $("#V3Y").val();
+        $.ajax({
+          type: 'GET',
+          url: 'https://localhost:44337/API/triangleName?' + v1 +"&" +v2 +"&" + v3,
+          success: function (result) {
+            $('#result3').html(result);
+          }
+        });
+
+      });
+
+    });
+  </script>
+</head>
+<body>
+
+  <fieldset>
+    <legend>Hard Coded: https://localhost:44337/API/triangleName?v1.X=0&v1.Y=0&v2.X=10&v2.Y=10&v3.X=0&v3.Y=10 </legend>
+    <input type="button" value="Test hard coded" id="buttonTest1" />
+    <br />
+    <span id="result1"></span>
+  </fieldset>
+
+  <fieldset>
+    <legend>Full Param String:</legend>
+    param string: <input type="text" id="paramString" />
+    <input type="button" value="Test with full string" id="buttonTest2" />
+    <br />
+    <span id="result2"></span>
+  </fieldset>
+  <fieldset>
+    Vertex 1:<br />
+    X:<input type="number" id="V1X" />Y:<input type="number" id="V1Y" />
+    <br/>
+    Vertex 2:<br />
+    X:<input type="number" id="V2X" />Y:<input type="number" id="V2Y" />
+    <br/>
+    Vertex 3:<br/>
+    X:<input type="number" id="V3X"/>Y:<input type="number" id="V3Y"/>
+    <br/><br/>
+    <input type="button" value="Test with values" id="buttonTest3"/>
+    <br/>
+    <span id="result3"></span>
+  </fieldset>
+
+</body>
+</html>
